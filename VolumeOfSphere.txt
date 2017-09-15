@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// Program to calculate the volume of a cylinder when 
+// Program to calculate the volume of a sphere when 
 // given the diameter and length by the user. 
 
 int main(void)
