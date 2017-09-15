@@ -1,13 +1,15 @@
 #include <stdio.h>
 
-// Program to calculate the volume of a sphere when 
+// Program to calculate the volume of a cylinder when 
 // given the diameter and length by the user. 
 
 int main(void)
 {
 	float radius;
 	float volume;
+	float fourThirds = 4.0 / 3.0;
 	const float pi = 3.141593;
+
 
 
 	// get the data
@@ -15,7 +17,7 @@ int main(void)
 	scanf("%f", &radius);
 
 	// calculate volume
-	volume = ((4/3) * pi )* ((radius)*(radius)*(radius));
+	volume = (fourThirds * pi )* ((radius)*(radius)*(radius));
 
 	// output the result  
 	printf("\nVolume of your sphere is %f\n", volume);
