@@ -4,13 +4,18 @@ Sam O'Callaghan
 ES31 LAB1 X00131917
 A programme to calculate the volume of a 3 dimensional shape assigned by the instructor, using user console input. 
 */
-
 #define _USE_MATH_DEFINES
+#define pi 3.14f
+
 
 #include <stdio.h>
 //i decided to use an existing library for Pi, despite increasing the size of the program
-//I felt it was a good excuse to look at the API and get familiar with commonly used libraries.  
+//I felt it was a good excuse to look at the API and get familiar with standard libraries.  
 #include <math.h>
+
+//function prototypes
+float volumeCalculation(float totalWidth, float totalSpace, float totalDepth);
+
 
 //initialise integer variables
 float lengthOne = 0.0;
@@ -28,7 +33,7 @@ char entryConfirmationOne[] = "You have entered: \n";
 int main(void)
 {
 
-	printf("Total volume : %f", volume);
+	printf("Total volume : %f \n", volume);
 
 	//TotalBaseWidth
 	printf("%s", &widthPromptOne);
@@ -48,18 +53,24 @@ int main(void)
 	//calculation
 	volumeCalculation(lengthOne, lengthTwo, depthOne);
 
-	printf("Total volume : %f", volume);
+	printf("Total volume : %f \n", volume);
 
 	return 0;
 }
-//TODO Make this function function
+
 //function to calculate the volume of the object
 float volumeCalculation(float totalWidth, float totalSpace, float totalDepth) 
 {
 
-	float circleOne = (totalWidth * totalWidth * M_PI);
+	float circleOne = (totalWidth * totalWidth * pi);
+	
+	printf("circleOne : %f \n", circleOne);
+	
 	float circleTwo = (totalSpace * totalSpace * M_PI);
-	volume = ((circleOne - circleTwo) * totalDepth);
+
+	printf("circleTwo : %f \n", circleTwo);
+	
+	volume = ((circleOne - circleTwo) * depthOne);
 	
 	return volume;
 }
