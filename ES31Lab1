@@ -5,7 +5,6 @@ ES31 LAB1 X00131917
 A programme to calculate the volume of a 3 dimensional shape assigned by the instructor, using user console input. 
 */
 #define _USE_MATH_DEFINES
-#define pi 3.14f
 
 
 #include <stdio.h>
@@ -43,7 +42,11 @@ int main(void)
 	//TotalSpaceWidth
 	printf("%s", &widthPromptTwo);
 	scanf("%f", &lengthTwo);
-	printf("%s \t %f \n ", entryConfirmationOne, lengthTwo);
+	//TODO: condition check vs user entry
+	//if (lengthTwo < lengthOne)
+	//{
+		printf("%s \t %f \n ", entryConfirmationOne, lengthTwo);
+	//}
 
 	//TotalDepth
 	printf("%s", &depthPromptOne);
@@ -62,13 +65,16 @@ int main(void)
 float volumeCalculation(float totalWidth, float totalSpace, float totalDepth) 
 {
 
-	float circleOne = (totalWidth * totalWidth * pi);
+	float circleOne = (totalWidth * totalWidth * M_PI);
 	
-	printf("circleOne : %f \n", circleOne);
+	//for testing
+	//printf("circleOne : %f \n", circleOne);
 	
 	float circleTwo = (totalSpace * totalSpace * M_PI);
 
-	printf("circleTwo : %f \n", circleTwo);
+
+	//for testing
+	//printf("circleTwo : %f \n", circleTwo);
 	
 	volume = ((circleOne - circleTwo) * depthOne);
 	
