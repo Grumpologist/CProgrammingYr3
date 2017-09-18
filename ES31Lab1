@@ -1,19 +1,19 @@
 /*
 Sam O'Callaghan
-17/09/17
+18/09/17
 ES31 LAB1 X00131917
-A programme to calculate the volume of a 3 dimensional shape assigned by the instructor, using user console input. 
+A programme to calculate the volume of a 3 dimensional shape assigned by the instructor, using user console input.
 */
 #define _USE_MATH_DEFINES
 
-
-#include <stdio.h>
 //i decided to use an existing library for Pi, despite increasing the size of the program
 //I felt it was a good excuse to look at the API and get familiar with standard libraries.  
+#include <stdio.h>
 #include <math.h>
 
 //function prototypes
 float volumeCalculation(float totalWidth, float totalSpace, float totalDepth);
+int autoTest();
 
 
 //initialise integer variables
@@ -28,11 +28,25 @@ char widthPromptTwo[] = "Please provide the length of the space along the base o
 char depthPromptOne[] = "Please provide the depth of your shape:\n";
 char entryConfirmationOne[] = "You have entered: \n";
 
+//test data 
+/* an array with 4 rows and 3 columns*/
+int i, j;
+float testData[4][3] = 
+{ 
+	{ 5,1,1 },//row indexed 0
+	{ 4,2,4 },//row indexed 1
+	{ 6,2,4 },//row indexed 2
+	{ 4,1,6 } //row indexed 3
+};
 
+//TODO: condition check vs user entry
+//check for -ve values and zero
+//sort lengths
 int main(void)
 {
 
-	printf("Total volume : %f \n", volume);
+	//Call the testing procedure
+	autoTest();
 
 	//TotalBaseWidth
 	printf("%s", &widthPromptOne);
@@ -42,16 +56,14 @@ int main(void)
 	//TotalSpaceWidth
 	printf("%s", &widthPromptTwo);
 	scanf("%f", &lengthTwo);
-	//TODO: condition check vs user entry
-	//if (lengthTwo < lengthOne)
-	//{
-		printf("%s \t %f \n ", entryConfirmationOne, lengthTwo);
-	//}
-
+	printf("%s \t %f \n ", entryConfirmationOne, lengthTwo);
+	
 	//TotalDepth
 	printf("%s", &depthPromptOne);
 	scanf("%f", &depthOne);
 	printf("%s \t %f \n ", entryConfirmationOne, depthOne);
+
+
 
 	//calculation
 	volumeCalculation(lengthOne, lengthTwo, depthOne);
@@ -62,21 +74,65 @@ int main(void)
 }
 
 //function to calculate the volume of the object
-float volumeCalculation(float totalWidth, float totalSpace, float totalDepth) 
+float volumeCalculation(float totalWidth, float totalSpace, float totalDepth)
 {
 
 	float circleOne = (totalWidth * totalWidth * M_PI);
-	
+
 	//for testing
 	//printf("circleOne : %f \n", circleOne);
-	
+
 	float circleTwo = (totalSpace * totalSpace * M_PI);
-
-
+	
 	//for testing
 	//printf("circleTwo : %f \n", circleTwo);
-	
+
 	volume = ((circleOne - circleTwo) * depthOne);
-	
+
 	return volume;
-}
+}//end of function
+
+int autoTest() {
+	//Automatic test procedure
+	//Test Data stored in 2D array
+	//nested for loop to iterate through the data in a logical fashion
+	for (int i = 0; i < 4; i++)
+	{
+		//standin Variables
+		//int testWidth = 0;
+		//int testSpace = 0;
+		//int testDepth = 0;
+
+		for (int j = 0; j < 3; j++)
+		{
+			//local variable
+			int loader = j;
+			//test console output
+			//printf("testData[%d][%d] = %f\n", i, j, testData[i][j]);
+			
+			//this switch reads the test data arrays for testing the calculation function. 
+			switch (loader)
+			{
+				case (0):
+					lengthOne = testData[i][j];
+					break;
+				case (1):
+					lengthTwo = testData[i][j];
+					break;
+				case (2):
+					depthOne = testData[i][j];
+					break;
+				default:
+					break;
+			}
+
+		}//inner for loop
+		//call volumeCalculation with testData
+		volumeCalculation(lengthOne, lengthTwo, depthOne);
+		printf("Test volume %d : %f \n", i, volume);
+	}//outer for loop
+
+	printf("\n\t\tAuto testing complete\n\n\n\n");
+
+
+}//end of function
