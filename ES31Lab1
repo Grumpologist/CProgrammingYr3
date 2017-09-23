@@ -203,19 +203,20 @@ int valueValidation(float * inputValue) {
 
 	int bool = 0;
 	//check user input
-	if (inputValue > 0)
+	if (inputValue < 0)
 	{
 		//print out user input confirmation 
-		printf("%s \t %f \n ", entryConfirmationOne, inputValue);
+		printf("invalid input \n ");
 
-		//return true
-		bool = 1;
 
 	}
 	else {
 
 		//print out user input error message
-		printf("%s \n", invalidEntry);
+		printf("valid input \n ");
+
+		//return true
+		bool = 1;
 
 	}//end if
 
