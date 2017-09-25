@@ -1,0 +1,107 @@
+/*
+Sam O'Callaghan
+25 / 09 / 17
+ES31 LAB3 X00131917
+A programme to demonstrate the use of functions.
+Version 1.0
+*/
+
+#define _USE_MATH_DEFINES
+
+#include <stdio.h>
+#include <math.h>
+
+//funtion prototypes
+float getRadius();
+float getLength();
+float calcSurface(float localRadius, float localHeight);
+float calcVolume(float localRadius, float localHeight);
+void printResults(float localArea, float localVolume);
+
+
+void main() {
+
+	//initialise integer variables
+	float radius = 0;
+	float height = 0;
+	float surfaceArea = 0;
+	float volume = 0;
+
+	//function calls
+	radius = getRadius();
+	height = getLength();
+	surfaceArea = calcSurface(radius, height);
+	volume = calcVolume(radius, height);	
+	printResults(surfaceArea, volume);
+	
+}//END MAIN
+
+
+//function to prompt user for input to be taken as cylinder radius
+float getRadius() 
+{
+	float temp = 0;
+
+	printf("Please provide a radius: \n");
+	
+	scanf("%f", &temp);
+	
+	return temp;
+
+}//end getRadius
+
+//function to prompt user for input to be taken as cylinder height
+float getLength()
+{
+	float temp = 0;
+
+	printf("Please provide a height: \n");
+
+	scanf("%f", &temp);
+
+	return temp;
+
+}//end getLength
+
+//function to calculate the surface area of a cylinder
+float calcSurface(float localRadius, float localHeight)
+{
+	//local storage
+	float tempOne = 0;
+	float tempTwo = 0;
+	float tempSurfaceArea = 0;
+	//2 pi r h
+	tempOne = (2 * M_PI * localRadius * localHeight);
+	//2 pi r sqared
+	tempTwo = (2 * M_PI * localRadius * localRadius);
+	//(2 pi r h) plus (2 pi r sqared)
+	tempSurfaceArea = tempOne + tempTwo;
+	//return value of calculated result
+	return tempSurfaceArea;
+
+}//end calcSurface
+
+//function to calculate the volume of a cylinder
+float calcVolume(float localRadius, float localHeight)
+{
+	//local storage
+	float localVolume = 0;
+	//pi * r squared * height
+	localVolume = (M_PI * localRadius * localRadius * localHeight);
+	//return value of calculated result
+	return localVolume;
+
+}//end calcVolume
+
+//a funtion to print the results
+void printResults(float localArea, float localVolume)
+{
+	//local storage
+	float tempArea = localArea;
+	float tempVolume =localVolume;
+
+	//print results
+	printf("Cylinder volume = %f \n", tempVolume);
+	printf("Cylinder surface area = %f \n", tempArea);
+
+}//end printResults
