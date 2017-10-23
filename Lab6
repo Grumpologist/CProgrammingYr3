@@ -1,0 +1,157 @@
+/*************************************************************************************
+**********************************Sam O'Callaghan*************************************
+******************************Lab 6 - for loop lab************************************
+************************************19/10/2017****************************************
+**************************************************************************************
+*****************************This program uses a for loop*****************************
+*****************************and counts up a bit**************************************
+*****LAB INSTRUCTIONS*****************************************************************
+/*
+Using a "for" loop and "comma" operators write a program to solve the following problem:
+
+At a certain moment in time car1 is "headStart"km ahead of car2.
+
+How long (in hours,mins,secs) will it take for car2 to overtake car1,
+if car1 starts travelling at "Speed1" km/hr with an acceleration of "Acc1" km/hr/hr and
+car2 starts travelling at "Speed2" km/hr with an acceleration of "Acc2" km/hr/hr.
+
+All measurement variables are in floats and should be input by the user.
+
+Show a sample "run" with the program code and header sheet in a word doc.
+
+Are there any input speed and acceleration cases which you should test or allow for?
+
+A formula for distance traveled  "s1" is:
+
+s1=speed1*tt + 0.5*acc1*(tt)^2       where "tt" is the time elapsed.
+
+**************************************************************************************
+*/
+
+#include <stdio.h>
+
+//function prototypes
+void userInput(float inputValue, char userPrompt[]);
+int valueValidation(float * inputValue);
+
+
+//create strings to prompt user feedback
+char carOnePromptOne[] = "Please enter a speed for Car One(km / h) :";
+char widthPromptTwo[] = "Please provide the length of the space along the base of your shape:\n";
+char depthPromptOne[] = "Please provide the depth of your shape:\n";
+char entryConfirmationOne[] = "You have entered: \n";
+char invalidEntry[] = "Invalid Entry, please try again\n\n\n\n";
+
+
+
+int main()
+{
+	//INITIALISE VARIABLES
+
+	//"CAR ONE" VARIABLES
+	float speedOne = 0;
+	float accelerationOne = 0;
+	float headStartKm = 0;
+	float carOneDistanceTravelled = 0;
+	//"CAR TWO"  VARIABLES
+	float speedTwo = 0;
+	float accelerationTwo = 0;
+	float carTwoDistanceTravelled = 0;
+
+	//TIME VARIABLES
+	float timeElapsed;
+	int seconds, minutes, hours;
+
+	//########SIMPLE GET#########
+	//#######USER INPUT##########
+	//###########################
+
+	printf(carOnePromptOne);//maybe imagine it's criminals fleeing a crime
+	scanf("%f", &speedOne);
+	printf("Please enter an accleration for Car One(km/h/h):");//put your foot down
+	scanf("%f", &accelerationOne);
+	printf("Please enter a distance for Car Ones headstart(km):");//oh no, here come the cops!
+	scanf("%f", &headStartKm);
+
+
+	printf("Please enter a speed for Car Two(km/h):");//nee na nee na
+	scanf("%f", &speedTwo);
+	printf("Please enter an accleration for Car Two(km/h/h):");//oh no they're gaining on us!
+	scanf("%f", &accelerationTwo);
+
+	//ADD HEADSTART
+	carOneDistanceTravelled = carOneDistanceTravelled + headStartKm;
+
+
+
+	//FOR LOOP AS SPECIFIED 	
+	for (float i = 0; carOneDistanceTravelled > carTwoDistanceTravelled; i++)
+	{
+		//unit conversion from seconds to hours 
+		timeElapsed = i / 3600;
+		//maths for 'distance'
+		carOneDistanceTravelled = headStartKm + ((speedOne * timeElapsed) + (0.5 * accelerationOne * timeElapsed * timeElapsed));
+		//maths for 'distance'
+		carTwoDistanceTravelled = ((speedTwo * timeElapsed) + (0.5 * accelerationTwo * timeElapsed * timeElapsed));
+
+		timeElapsed = i;
+	}//END 
+
+	//CONNVERSION FROM SECONDS TO HOURS:MINUTES:SECONDS
+
+	hours = (timeElapsed / 3600);
+	
+	seconds = timeElapsed - (hours * 3600);
+	
+	minutes = (seconds / 60);
+	
+	seconds = seconds - (minutes * 60);
+		
+	printf("H %d : M %d : S %d\n", hours, minutes, seconds);
+	
+	
+}//END MAIN
+
+void userInput(float * inputValue, char * userPrompt[]) {
+	//to facilitate exiting the for loop
+	int check = 0;
+
+	//to iterate through 3 possible erronous inputs 
+	for (int i = 0; i < 3; i++) {
+		//prompt user for input
+		printf("%s", userPrompt);
+		//read user input
+		scanf("%f", inputValue);
+		//validate user entry
+		check = valueValidation(inputValue);
+
+		//force exit of for loop upon valid entry
+		if (check == 1) {
+			i = 3;
+		}//end if
+
+	}//end for
+
+}//end User Input
+
+ //function to check for -ve values and zero
+int valueValidation(float * inputValue) {
+
+	//to return result
+	int bool = 0;
+	//for condition check
+	float test = *inputValue;
+
+	//check user input
+	if (test <= 0)
+	{
+		//print out user input confirmation 
+		printf("invalid input \n ");
+	}
+	else {
+		//return true
+		bool = 1;
+	}//end if
+	return bool;
+
+}//end valueValidation
